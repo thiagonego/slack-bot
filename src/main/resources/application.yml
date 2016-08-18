@@ -2,5 +2,5 @@ slack:
   commands:
     ramal:
       token: kwX6VVQ9JfsVeTzbsjWLVj72
-      user-names: thiago.sampaio;ramon.sousa
+      user-names: thiago.sampaio;ramon.sousa;erico.campos;herbertcampelo;alisson.andrade;nielson.rolim;carlos.junior;filipe.germano;cbiribilli
       csv-path: https://raw.githubusercontent.com/thiagonego/slack-bot/master/src/main/resources/f.csv
