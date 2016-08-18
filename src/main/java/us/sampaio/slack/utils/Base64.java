@@ -68,19 +68,8 @@ public class Base64{
 
      public static List<String> decode(String csvHerokuPath) throws IOException {
           
-          String decoded = "";
-//          File arquivoFinal = getArquivoFinal();
-//          if (!arquivoFinal.exists()) {
-//             
-               String conteudoSite = IOUtils.toString(WorldWideWeb.getConteudoArquivo(csvHerokuPath));
-               decoded = new String(Base64Utils.decodeFromString(conteudoSite));
-//               
-//          }else{
-//               
-//               decoded = new String(Base64Utils.decodeFromString(Files.toString(arquivoFinal, Charsets.UTF_8)));
-//          }
-          
-          
+          String conteudoSite = IOUtils.toString(WorldWideWeb.getConteudoArquivo(csvHerokuPath));
+          String decoded = new String(Base64Utils.decodeFromString(conteudoSite));
           return Lists.newArrayList(Splitter.on("\n").omitEmptyStrings().split(decoded));
 
      }
