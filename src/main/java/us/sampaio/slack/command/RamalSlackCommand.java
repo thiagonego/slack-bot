@@ -93,7 +93,7 @@ public class RamalSlackCommand {
         }
         
         List<Ramal> result = ramais.stream()
-                                      .filter(r -> r.getSetor().contains(text) || r.getRamal().contains(text) || r.getNome().contains(text))
+                                      .filter(r -> r.getSetor().toLowerCase().contains(text.toLowerCase()) || r.getRamal().toLowerCase().contains(text.toLowerCase()) || r.getNome().toLowerCase().contains(text.toLowerCase()))
                                       .collect(Collectors.toList());
         
         if(Objeto.isBlank(result)){
@@ -120,11 +120,13 @@ public class RamalSlackCommand {
         
     }
     
-     private String toString(List<Ramal> r) {
+     private String toString(List<Ramal> numeros) {
 
           StringBuilder s = new StringBuilder();
-          if (Objeto.notBlank(r)) {
-               s.append(r.toString());
+          if (Objeto.notBlank(numeros)) {
+               numeros.forEach(r -> {
+                    s.append(r.toString());
+               });
           }
           return s.toString();
      }
