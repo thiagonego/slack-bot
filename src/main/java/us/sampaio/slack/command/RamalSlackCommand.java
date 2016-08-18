@@ -48,9 +48,16 @@ public class RamalSlackCommand {
           read();
      }
      
+     @RequestMapping(value = "/robots.txt", method = RequestMethod.GET)
+     public String robots() {
+
+          return "Disallow: *";
+     }
+     
+     
      @RequestMapping(value = "/echo", method = RequestMethod.GET)
      public String echo() {
-
+          
           return String.format("ECHO at: %s", Data.getDataFormatada(new Date(), "dd/MM/yyyy HH:mm:ss.SSS"));
      }
      

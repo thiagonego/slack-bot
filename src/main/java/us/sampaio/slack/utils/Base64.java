@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.Base64Utils;
 
@@ -70,8 +71,8 @@ public class Base64{
           String decoded = "";
           File arquivoFinal = getArquivoFinal();
           if (!arquivoFinal.exists()) {
-               
-               String conteudoSite = WorldWideWeb.getConteudoSite(csvHerokuPath);
+             
+               String conteudoSite = IOUtils.toString(WorldWideWeb.getConteudoArquivo(csvHerokuPath));
                decoded = new String(Base64Utils.decodeFromString(conteudoSite));
                
           }else{
