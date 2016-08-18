@@ -11,6 +11,6 @@ public class Ramal{
      public String setor = "";
      
      public String toString(){
-          return String.format(" %s - %s - %s \n", nome, ramal, setor);
+          return String.format(" %s - %s \n", nome, ramal);
      }
 }
