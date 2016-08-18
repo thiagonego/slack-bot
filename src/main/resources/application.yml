@@ -3,4 +3,4 @@ slack:
     ramal:
       token: kwX6VVQ9JfsVeTzbsjWLVj72
       user-names: thiago.sampaio;ramon.sousa
-      csv-path: https://raw.githubusercontent.com/thiagonego/slack-bot/master/src/main/resources/o.csv
+      csv-path: https://raw.githubusercontent.com/thiagonego/slack-bot/master/src/main/resources/f.csv
