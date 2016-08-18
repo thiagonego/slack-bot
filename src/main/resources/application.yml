@@ -1,2 +1,5 @@
-slashcommandtoken: kwX6VVQ9JfsVeTzbsjWLVj72
-usuarios: thiago.sampaio;ramon.sousa
+slack:
+  commands:
+    ramal:
+      token: kwX6VVQ9JfsVeTzbsjWLVj72
+      user-names: thiago.sampaio;ramon.sousa
