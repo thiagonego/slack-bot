@@ -11,6 +11,6 @@ public class Ramal{
      public String setor = "";
      
      public String toString(){
-          return String.format("Nome: %s Ramal: %s Setor: %s \n", nome, ramal, setor);
+          return String.format("*Nome:* %s      *Ramal:* %s      *Setor:* %s \n", nome, ramal, setor);
      }
 }
