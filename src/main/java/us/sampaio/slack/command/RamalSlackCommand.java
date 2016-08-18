@@ -1,7 +1,5 @@
 package us.sampaio.slack.command;
 
-import java.io.File;
-import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,19 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.Charsets;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
-import com.google.common.io.Files;
 
 import br.com.twsoftware.alfred.data.Data;
-import br.com.twsoftware.alfred.net.WorldWideWeb;
 import br.com.twsoftware.alfred.object.Objeto;
 import lombok.extern.slf4j.Slf4j;
 import us.sampaio.slack.models.Attachment;
 import us.sampaio.slack.models.Ramal;
 import us.sampaio.slack.models.RichMessage;
-import us.sampaio.slack.utils.ReadCSV;
+import us.sampaio.slack.utils.Base64;
 
 @RestController
 @Slf4j
@@ -135,18 +130,7 @@ public class RamalSlackCommand {
           ramais = Lists.newArrayList();
           try {
                
-               List<String> lines = null;
-               try {
-                    
-                    URL resource = ReadCSV.class.getClassLoader().getResource("o.csv");
-                    lines = Files.readLines(new File(resource.getFile()), Charsets.UTF_8);
-                    
-               } catch (Exception e) {
-                    
-                    String conteudoSite = WorldWideWeb.getConteudoSite(csvPath);
-                    lines = Lists.newArrayList(Splitter.on("\n").omitEmptyStrings().split(conteudoSite));
-                    
-               }
+               List<String> lines = Base64.decode(csvPath);
                
                if (Objeto.notBlank(lines)) {
 
