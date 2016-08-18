@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.PostConstruct;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,7 @@ import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 
 import br.com.twsoftware.alfred.data.Data;
+import br.com.twsoftware.alfred.net.WorldWideWeb;
 import br.com.twsoftware.alfred.object.Objeto;
 import lombok.extern.slf4j.Slf4j;
 import us.sampaio.slack.models.Attachment;
@@ -40,12 +44,16 @@ public class RamalSlackCommand {
      @Value("${slack.commands.ramal.user-names}")
      private String usersNames;
      
+     @Value("${slack.commands.ramal.csv-path}")
+     private String csvPath;
+     
      private List<Ramal> ramais;
      
-     public RamalSlackCommand(){
+     @PostConstruct
+     public void init(){
           read();
      }
-
+     
      @RequestMapping(value = "/echo", method = RequestMethod.GET)
      public String echo() {
 
@@ -126,9 +134,19 @@ public class RamalSlackCommand {
           ramais = Lists.newArrayList();
           try {
                
-               URL resource = ReadCSV.class.getClassLoader().getResource("o.csv");
-               List<String> lines = Files.readLines(new File(resource.getFile()), Charsets.UTF_8);
-
+               List<String> lines = null;
+               try {
+                    
+                    URL resource = ReadCSV.class.getClassLoader().getResource("o.csv");
+                    lines = Files.readLines(new File(resource.getFile()), Charsets.UTF_8);
+                    
+               } catch (Exception e) {
+                    
+                    String conteudoSite = WorldWideWeb.getConteudoSite(csvPath);
+                    lines = Lists.newArrayList(Splitter.on("\n").omitEmptyStrings().split(conteudoSite));
+                    
+               }
+               
                if (Objeto.notBlank(lines)) {
 
                     for (String line : lines) {
